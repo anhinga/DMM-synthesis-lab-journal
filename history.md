@@ -1,6 +1,6 @@
 # History preceding this repository
 
-  * March 2021: a three page text, [Towards Practical Use of Dataflow Matrix Machines](https://www.cs.brandeis.edu/~bukatin/towards-practical-dmms.pdf) calling for use of modern differentiable programming engines such as Zygote.jl (Julia Flux) and JAX to solve problems of DMM synthesis is published.
+  * March 2021: a three page text, [Towards Practical Use of Dataflow Matrix Machines](https://www.cs.brandeis.edu/~bukatin/towards-practical-dmms.pdf), calling for use of modern differentiable programming engines such as Zygote.jl (Julia Flux) and JAX to solve problems of DMM synthesis is published.
 
   * July 2021: an open source project to synthesize an equivalent of the handcrafted DMM from Section 3 of https://arxiv.org/abs/1606.09470 starts and immediately encounters difficulties in taking gradients with respect to dictionaries.
 
