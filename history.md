@@ -12,7 +12,7 @@
 
   * June 2022: First successful training of a DMM using Zygote.jl.
 
-  * June 2022: First successful synthesis of sparse DMMs via a sparsifying training procedure. The synthesized DMM has impressive generalization properties.
+  * June 2022: First successful synthesis of sparse DMMs via a sparsifying training procedure. The synthesized DMMs have impressive generalization properties.
 
   * July 2022-August 2022: Some follow-up expreriments (everything is done using Zygote.jl).
 
