@@ -8,13 +8,13 @@
 
   * April 2022: I obtain and open source a Zygote.jl (Julia Flux) example of taking gradients with respect to dictionaries: https://github.com/anhinga/julia-flux-drafts/tree/main/arxiv-1606-09470-section3
 
-  * May 2022: First gradients with respect to tree-based sparse connectivity matrix of a DMM.
+  * May 2022: First gradients with respect to tree-based sparse connectivity matrix of a DMM using Zygote.jl.
 
-  * June 2022: First successful training of a DMM.
+  * June 2022: First successful training of a DMM using Zygote.jl.
 
   * June 2022: First successful synthesis of sparse DMMs via a sparsifying training procedure. The synthesized DMM has impressive generalization properties.
 
-  * July 2022-August 2022: Some follow-up expreriments.
+  * July 2022-August 2022: Some follow-up expreriments (everything is done using Zygote.jl).
 
   * September 2022: I open source the May-August work: https://github.com/anhinga/julia-flux-drafts/tree/main/arxiv-1606-09470-section3/May-August-2022
   
