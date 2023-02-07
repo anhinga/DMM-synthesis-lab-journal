@@ -6,4 +6,4 @@ This will continue the line of research started here: https://github.com/anhinga
 
 History preceding this repository: [history.md](history.md)
 
-[jan12-23-talk-proposal.md](draft/jan12-23-talk-proposal.md) - a high-level description of the state of this project as of September 2022
+[jan12-23-talk-proposal.md](drafts/jan12-23-talk-proposal.md) - a high-level description of the state of this project as of September 2022
