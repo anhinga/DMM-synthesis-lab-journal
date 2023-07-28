@@ -1,4 +1,6 @@
-Materials for my JuliaCon 2023 talk
+Materials for my JuliaCon 2023 talk:
+
+**"Exploring synthesis of flexible neural machines with Zygote.jl"**
 
 [JuliaCon-2023-slides.pdf](JuliaCon-2023-slides.pdf) - slides
 
