@@ -5,3 +5,5 @@ Materials for my JuliaCon 2023 talk:
 [JuliaCon-2023-slides.pdf](JuliaCon-2023-slides.pdf) - slides
 
 [history.md](history.md) - links to code and logs of experiments
+
+The video recording is currently at https://www.youtube.com/watch?v=FIeO1yenQ6Y starting at 4 hours 58 minutes
