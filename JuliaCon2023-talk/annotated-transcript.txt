@@ -1,0 +1,144 @@
+Annotated transcript of the talk:
+
+4:58:30
+
+Session chair: So, our next talk today will be about 
+exploring synthesis of flexible neural machines
+with the Zygote, and our presenter is Mishka!
+
+
+Hi, aha, this [microphone] works, thanks! Thanks for organizers of JuliaCon,
+and 
+
+so on my github there are materials related to this presentation:
+slides and the open source code and protocols of experiments
+
+and Julia is great when you need to do something non-standard
+
+here we are going to synthesize neural machines
+
+4:59:00
+
+and what will flow through wires is vectors represented by dictionaries
+so they are infinite-dimensional, but very sparse vectors
+with finite and usually small number of non-zero elements
+
+and this talk has two parts
+at first part I'll explain what are these machines
+and in the second I explain what I was doing with them for Zygote
+and I am really trying to find collaborators on this
+
+4:59:30
+
+so if you transition from traditional neural net to Transformers
+the result is much more expressive machines and also machines
+which are much easier to train
+
+and so they... and so that's how we get the modern magic
+
+now if you generalize further you can get even more expressive machines
+you can have machines
+
+5:00:00
+
+in which you can write general [person - strike that] purpose
+continuously deformable dataflow programs and you can have machines
+which can easily self-modify, and all kinds of magic,
+but they are not optimized for training, they are too flexible,
+they completely don't fit any modern workflows
+
+so, Zygote however is very flexible and you can use it to do
+at least some training tasks [here] and hopefully 
+we'll optimize them [the flexible neural machines] better in the future
+
+so if you think about 
+
+5:00:30
+
+neural computations the essence is that you interleave linear and
+non-linear computations, so you just need alternating pattern like this
+
+and so what's the natural degree of generality?
+it's not streams of numbers
+it's any streams as long as you can combine them with coefficients.
+
+that's ... that's your ... that's what one should aim for
+
+and so you get this very natural class of neural machines
+which use 
+
+5:01:00
+
+single neurons [to] transform arbitrary streams
+and you also to push power further to the limit you allow
+arbitrary arity of activation functions
+
+and you consider streams of tree-like objects
+they are very nice to do all kind of interesting things
+and you say ok you have unbounded network size,
+so network can dynamically change
+and so you have your Turing-completeness
+
+5:01:30
+
+because you have unbounded memory finite at any given moment
+
+and so if you look at traditional recurrent nets
+these are all numbers and these numbers are linear combinations of these
+and neurons process nonlinearly these numbers inside
+and we want them to become instead of [numbers we wa]... streams of numbers
+we want these to become linear streams
+
+and
+
+5:02:00
+
+so what's interesting about linear streams
+essentially if you consider linear combination
+that's essentially "artificial attention"
+that's what attention is: 
+linear combination of high-dimensional vector-like objects
+
+so we are getting a situation where every input of a neuron
+becomes [an] attention device
+
+and there are all kinds of these streams
+and you can even incorporate
+
+5:02:30
+
+discrete object into them by statistical sum
+
+and here is a typical DMM
+it [a neuron] has multiple inputs, multiple outputs
+any input is a linear combination of output streams
+and inside neurons there can be complicated processing
+
+and it's very powerful, but cumbersome
+because these wires have types
+this one might be for one kind 
+
+5:03:00
+
+of linear stream
+this one might be for another kind of linear stream
+
+and you need this ... and you need this type correctness condition
+because if they are of different types then it does not make sense
+to connect them
+
+we would like to have one big type which is universal and ...
+sufficiently universal,
+and [it] turns out that streams of tree-like objects work well
+
+and because they are tree-like objects, they allow use
+
+5:03:30
+
+to define variadic neurons
+so we won't need to keep track of arity either
+
+and so we'll call them V-values for vector-like values
+and as a homage to S-expressions
+
+TRANSCRIPT IN PROGRESS (the above covers first 5 minutes)
