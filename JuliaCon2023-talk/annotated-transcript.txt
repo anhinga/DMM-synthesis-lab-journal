@@ -1,10 +1,15 @@
+"Exploring synthesis of flexible neural machines with Zygote.jl"
+
+The video recording is currently at https://www.youtube.com/watch?v=FIeO1yenQ6Y 
+starting at 4 hours 58 minutes
+
 Annotated transcript of the talk:
 
 4:58:30
 
 Session chair: So, our next talk today will be about 
 exploring synthesis of flexible neural machines
-with the Zygote, and our presenter is Mishka!
+with Zygote, and our presenter is Mishka!
 
 
 Hi, aha, this [microphone] works, thanks! Thanks for organizers of JuliaCon,
@@ -131,7 +136,7 @@ we would like to have one big type which is universal and ...
 sufficiently universal,
 and [it] turns out that streams of tree-like objects work well
 
-and because they are tree-like objects, they allow use
+and because they are tree-like objects, they allow us
 
 5:03:30
 
@@ -141,4 +146,143 @@ so we won't need to keep track of arity either
 and so we'll call them V-values for vector-like values
 and as a homage to S-expressions
 
-TRANSCRIPT IN PROGRESS (the above covers first 5 minutes)
+and vector-like... and this space... there are several ways
+you can look at this space
+
+you can think about it as finite linear combinations... 
+formal linear combinations of strings of letters,
+
+or you can think about these as finite prefix trees with
+numeric leaves
+
+5:04:00
+
+or you can think about them as tensors of mixed rank:
+(sparse scalars)[should be: "scalar"] plus sparse array plus
+sparse matrix plus sparse tensor of rank three, for example,
+like here, this is the ... an example
+
+so these are all these different ways of looking [at this structure]
+I am going to talk about [the] highlighted way
+so this is scalar, this is ... on this level is sparse array,
+one dimensional,
+on this level is sparse matrix,
+on this level is sparse tensor of rank three
+
+5:04:30
+
+that['s] how it works
+
+and then this is your neural machine
+you take all arguments of a si[ngle neuron]
+and unite them in a single tree
+
+so now your activation function just takes a tree and
+produces another tree 
+
+but your linear operator works like this:
+it computes subtrees on this level [first sublevel]
+as linear combination of subtrees on this level [first sublevel]
+
+and that's... 
+
+5:05:00
+
+kind of... it takes some getting used to
+and work (for)[with] it, that's a bit unusual,
+but that's very simple, easy to implement, nothing to keep track of
+
+and then you can program with this
+there are a number of good constructions which help programming
+I'll talk about some of them
+and the result is that you can do things
+
+for example, [an] important construction is accumulator
+which implements memory in a neural machine
+
+5:05:30
+
+so you take a neuron which takes sum of its arguments
+and you connect the output to one of these arguments... with weight 1
+
+this ensures that what gets there, stays there,
+and then you take updates on the other input.
+
+and that's super-important you use it all the time everywhere
+
+then, because you have arity [of] more than one argument,
+it's easy to implement multiplicative construction[s]
+
+5:06:00
+
+you ... one linear combination on one argument, say, gives you a multiplier
+and another one gives you what you want to multiply this multiplier by
+and you get this ...
+
+and you have sparse vectors of high or infinite dimension
+
+this is [the] example I am going to use in the second part of the talk
+consider a neuron which accumulates a count of words in a text
+
+5:06:30
+
+so it will be a map from a token to how many it appears
+so that's a vector
+and it's an infinite-dimensional space
+because number of words is potentially infinite
+but it has only [a] finite number of non-zero elements
+because the text is finite
+
+that's a typical [situation]
+
+and one can represent all kind of data strcutures
+because you have these trees
+
+and then how do ... and then these remarkable things
+
+5:07:00
+
+can easily change themselves
+it's a total nightmare for ordinary recurrent neural nets to
+change themselves because they have too few neurons
+compared to [the] number of weights
+but here it's very simple
+you just allocate [a] single neuron to hold the whole matrix
+of the whole network
+and you just hold it in this neuron as an accumulator
+and you take update from the other neurons
+and then you can modify... [the] network can modify weight[s]
+
+5:07:30
+
+can modify its own topology, can grow
+
+and we did some very innocent things with it [with this mechanism]
+we just made [a] network to propagate waves through its own matrix
+we just ran some random networks and observed interesting dynamic systems
+and we just used it [this mechanism] to do live-coding
+we told the network by editor: send it [a] signal:
+"modify (itself) [yourself] this way", and it changes while running'
+
+but people thinking more and more
+
+5:08:00
+
+that the ability of AI to ... to change ... to creatively modify itself
+in this way and that way holds both big promise and huge peril
+
+and this is the quintessential way 
+it's the most clear formalism to do self-modification and self-improvement
+so AI safety issues are very real here
+and I hope that people who will play with something like this
+
+5:08:30
+
+will mind them and will keep them in mind
+
+because who knows what will happen,
+I don't.
+
+*************************
+
+TRANSCRIPT IN PROGRESS (the above covers first 10 minutes)
