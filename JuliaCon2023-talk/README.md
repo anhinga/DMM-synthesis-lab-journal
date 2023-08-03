@@ -8,7 +8,7 @@ Compact neural machines (dataflow matrix machines) approximating a simple algori
 were synthesized using a novel neural architecture search method
 (differentiable programming + training with sparsifying regularization).
 
-Their generalization properties with a tiny training data set turned to be
+Their generalization properties with a tiny training data set turned out to be
 remarkably good.
 
 ---
