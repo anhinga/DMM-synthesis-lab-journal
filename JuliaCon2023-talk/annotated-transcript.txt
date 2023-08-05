@@ -457,4 +457,76 @@ I think it's a nice discovery
 
 5:14:30
 
-TRANSCRIPT IN PROGRESS (the above covers first 16 minutes)
+OK, so that was what we [have] done
+now I want to give a couple of slides on concluding remarks
+and give [answers to] questions
+
+so if you use Zygote to take this kind of gradients
+don't use old style
+if you use "params" it won't work
+
+just... it will silently break, and you won't know why
+
+sometimes Zygote generates code which computes gradients incorrectly
+it does happen occasionally
+do include tests
+
+5:15:00
+
+compare occasionally with numerical derivatives as a sanity check
+
+now... "backprogration theorem" promises us that gradients are fast
+no more than 4 times multiplied by [the] number of operations which
+the function takes
+
+however this promise in practice is not always held
+because very often forward code is well optimizable
+and overall code is not so well optimizable
+so sometimes slowdown[s] happen and that's unfortunate
+
+5:15:30
+
+and one (have) [has] to deal with it
+
+and finally, it's great to have help from experts
+it's like... makes [a] huge difference
+and I am very thankful to Mike Innes for unblocking me at one point
+it's great!
+
+so this is just an exploration
+it's not even a package, it's an open source prototype
+
+yeah... and we would like to make it a technology
+
+and I think it is... 
+the scale of this work is such that it needs a small team
+
+5:16:00
+
+people need to think together how to do it, discuss... like
+
+it's not just even coding
+it's... people need to like... get together and think 
+what is the right approach to make [this happen]
+
+these are very tempting neural machines
+it's a shame that we are not using them
+
+so it would be nice to start using them
+
+that's why I am looking [for collaborators]
+
+and I can be contacted via github by opening an issue
+or by e-mail
+
+and thank you very much for your attention
+
+5:16:30
+
+and now I am ready for questions
+
+*************************
+
+QUESTIONS
+
+TRANSCRIPT IN PROGRESS (the above covers first 18 minutes)
