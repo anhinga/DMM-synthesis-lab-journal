@@ -285,4 +285,176 @@ I don't.
 
 *************************
 
-TRANSCRIPT IN PROGRESS (the above covers first 10 minutes)
+PART 2
+
+OK, so there is this promise. This formalism has nice promise.
+
+if we expect that networks can modify themselves,
+they should be able to learn to modify themselves better
+
+and then you can synthesize them
+it's... on one hand, you have here small compact nice machines
+you can read them and understand them
+
+5:09:00
+
+and that's like program synthesis
+
+but on the other hand, they are... they are defined by matrices
+by continuous models, that's like [program inference]
+
+that's a very combination and we hope that it will work
+but how to make this hope a reality?
+
+and [the] second part of the talk
+
+Julia to help with flexible things
+
+so Zygote is the first machine learning system with enough flexibility
+to do that without distortions
+
+5:09:30
+
+in particular you can take gradients with respect to trees
+not with respect to variables which are in arrays or in [matrices]
+but you can have variables in [the] leaves of trees and
+you can take gradients with respect to them all
+
+now there is some competition
+JAX can do it now, and Enzyme can now do it,
+but I think Zygote is still... 
+for [a] number of reasons I still prefer Zygote for this
+
+so we'll use neural architecture search to synthesize a machine 
+
+5:10:00
+
+with desired properties
+
+consider a machine consisting of modules
+which are just our DMM neurons
+
+connect (it)[them] with data pipelines gated by scalars
+by DMM weights
+
+and... take a large network and start training it with
+sparsifying regularization 
+which will press weights... many weights close to zero
+
+and at some point we start
+
+5:10:30
+
+gradually pruning small... small weights
+and small connections away while continuing to train
+
+and here so... data pipelines for our task
+will carry streams of dictionaries
+
+and we are going to synthesize more or less a feedforward DMM
+but with some accumulators so there are some local recurrences still
+
+but basically we start with a feedforward network where every layer
+[is] fully connected to every subsequent layer
+
+5:11:00
+
+so with skip connections
+
+and consider handcrafted... this is a handcrafted DMM
+which is trying to detect whether there are duplicates
+in... in a text, duplicate words or duplicate letters in a string
+
+so here [an] accumulator accumulates this dictionary
+of ... mapping words... tokens to their counts
+
+and now you take a norm of this vector and compare it to one
+
+5:11:30
+
+and if it's larger than one then you know there are duplicates
+and this difference shows you how much... 
+what is the degree of duplication
+
+and here you take "end-of" symbol and take scalar... dot product
+with this end symbol and that's how you know how many "end-of" symbols
+you will encounter
+
+and so this can stop whenever [the] first non-zero arrives
+or it can continue and just compute these counts on the inputs
+
+5:12:00
+
+and now we are going to synthesize... try to synthesize
+a DMM which imitates this one
+
+and we form the following feedforward network
+[the] initial layer will be these three neurons
+[the] final layer will be [the] output [neuron]
+and intermediate layers will have 2 neurons of each type
+so 8 neurons
+
+and since everything is connected to everything after it
+this has about 1500 parameters
+and we are going to cut it two orders of magnitude
+
+5:12:30
+
+during training
+
+so... so... the original network had 8 neurons in each layer
+and every output of every neuron was connected to every input
+of every subsequent neuron
+and here we only have left this, because most of the things
+are pruned and there (is)[are] only 19 parameters here
+
+but accumulator connections are hard-coded
+we are not... we are not... 
+
+5:13:00
+
+we are not touching them
+
+so that's how they compare, the handcrafted one... 
+that's how they compare, the handcrafted one and the synthesized one
+
+and you can start looking at this and seeing
+the algorithmic interesting things
+the process invented
+and decide whether they are good or bad
+so [it's all] very readable, very analyzable
+
+and
+
+5:13:30
+
+and that's how the matrix looks
+
+this is just a V-value
+which is... this is [a] matrix with 19 non-zero elements... weights
+and that's [the] first five of them
+
+and the training was done on [an] absolutely minimalistic data set
+I took just one string, "test string" with three dots at the end
+
+and I was feeding one character to it every 10 time steps
+so one character, 
+
+5:14:00
+
+then 9 empty dictionaries, then another one... very small
+training sequence of 140 elements
+
+and still it generalized greatly
+
+it like... when you talk about short strings it works perfectly
+
+but within [the] training envelope
+if you start going to long strings, then you start seeing defects
+
+but yeah... but it's impressive that it works so well
+I think it's a nice discovery
+
+5:14:30
+
+TRANSCRIPT IN PROGRESS (the above covers first 16 minutes)
