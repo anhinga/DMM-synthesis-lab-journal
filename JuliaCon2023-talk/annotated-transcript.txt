@@ -529,4 +529,214 @@ and now I am ready for questions
 
 QUESTIONS
 
-TRANSCRIPT IN PROGRESS (the above covers first 18 minutes)
+Session chair: Hello... thank you for a great presentation
+we have plenty of time for questions
+so if anyone wants to ask any, raise your hand and
+
+let's see... I'll just give you the mike now
+
+Question 1: Cool... OK, thanks. 
+
+5:17:00
+
+Did you find in the structures
+that you ended up with at the end, are there any... like...
+is there anything redundant in there,
+or is it the same structure you drew out by hand?
+
+Answer: No, it's different, and it has some quirks,
+for example, here we just put input in[to] an accumulator,
+but here it for some reason also wants to give it ahead of time
+to subsequent elements
+and then it wants to... 
+
+5:17:30
+
+it really wants to propagate these things here
+and we didn't provide it a [mechanism for this], and instead of just...
+and instead of... (preserving)[using] a skip connection
+it abused this double-ReLU compare neuron to just ...
+basically abused it as a multiplier and did it a few times
+so yeah, yeah... there are strange redundancies
+and the question is how to get rid of (it)[them] is...
+it's basically a starting point for exploration, not an end point
+
+5:18:00
+
+yes... so, it's not optimal...
+
+Question 1: Cool, thank you.
+
+Question 2: Did you see if this infrastructure can debug?
+For example, did you take one of your handcrafted models
+and break it, and see if the infrastructure can fix it?
+
+Answer: If I... How do you mean, again?
+
+Question 2: So, take your handcrafted model...
+
+Answer: Aha
+
+Question 2: tweak something that it is broken
+
+Answer: OK
+
+Question 2: and then use it as your initial condition...
+Can it fix it?
+
+5:18:30
+
+Answer: If I use it as my initial condition?
+Then it will... probably, I don't...
+But, but... I would expect so, yes...
+I think it is easier than to train from the big one
+But I did not try, no...
+
+Session chair: Let's see... You have a question?
+
+Question 3: When you see you are taking the derivative
+with respect to a tree, how is that different from just
+taking the derivative 
+
+5:19:00
+
+with respect to each and every single variable in the tree,
+and is just... the tree is just basically a way to index each
+variable in the vector?
+
+Answer: Right, right... But if you take derivatives
+separately, then it's very long, right? Because then
+you multiply... then you basically don't take advantage of
+reverse mode and you get [the] number of your variables 
+[as complexity factor], so you need to take...
+
+you can probably... 
+
+5:19:30
+
+I thought about reshaping trees dynamically
+into arrays, about maintaining translation tables
+so that there... so that numbers are stored in flat array[s] and...
+
+and you know, I know how JAX does it, JAX as a compromise
+does lists of leaves which are arrays... So it depends...
+yeah, I think, I think it is possible to do all kind[s}
+of optimizations here...
+and I don't know which one to choose... and also...
+
+5:20:00
+
+and also, whatever you choose, 
+it would be nice to have a partner or two,
+because it is not that trivial [piece of] work...
+
+Question 4: Can you say a bit more about the sparsification?
+How does an edge disappear?
+
+Answer: Oh, here is... First of all, my loss function has
+an L1 term, so that's [sparsifying]... and then if it's like
+if it starts getting small... it is a manual... I do control it
+manually,
+
+5:20:30
+
+it is an attended [training] run, it's not blind run,
+I do some steps, I see that I want to cut-off [smallest weights]
+so it is a probably automatable [one]
+I think it is a good project to automate these attended runs
+but for now it's like sort of [a] very babysitted run
+I did not cheat, everything is recorded, but it's 
+it's not... it's not a blind thing.
+
+Session chair: []
+
+5:21:00
+
+Question 5: Yeah, thanks. so I did not completely understand
+the whole mechanism, but I am just curious in general.
+It seems to me like you are feeding trees to the neural network
+which comes with a kind of discrete structure.
+So I am just curious about how differentiating over that even
+works, what's the definition of [...] here
+
+Answer: Just, it's
+
+5:21:30
+
+it's like, arrays also have discrete structure, it's a grid
+of indices, this is just the indices instead of being shaped in
+a rectangular regular grid have tree shape. And derivatives [are]
+with respect to numbers in the leaves. So it's still derivative
+with respect to vector, to coordinates of a vector, but the secondary
+structure by which we structure the coordinates is different.
+
+5:22:00
+
+you can like... reshape... you know... you often in machine learning
+reshape between one-dimensional and two-dimensional, and here
+we can see the natural structure is tree-like and not regular.
+
+Question 5: Um, thanks.
+
+Session chair: Thank you. Let's see. Any other questions anyone wants to ask?
+Let's see. Let me see how we are in time. Yeah, we have some more time.
+I'll ask you one last question then, you know:
+
+5:22:30
+
+Question 6. I find a lot of these different AD platforms very interesting
+and you kind of skim over why you use Zygote versus Enzyme or JAX, which
+you know has kind of this tree stuff going on, so...
+
+Answer: Yeah, I can comment. I certainly... JAX is what I started with...
+Oh, I started with Zygote and I could not make it differentiate
+[with respect to] trees and I could not get help. 
+
+Then I learned to do it in JAX.
+But in JAX it's really unpleasant to program.
+
+5:23:00
+
+It's a nasty domain-specific language.
+You are not programming in Python, you are programming in JAX, and it's...
+Yeah...
+
+But then I have this [the ability to do it in JAX], and I found
+a nice issue discussing interface in Zygote, and I said, 
+"hey, I can do this in JAX, how can I do this in Zygote", and
+Mike Innes himself showed me how to do it, and I saw:
+"ha, I am using `params`, and I am stupid, and I should not [use `params`]".
+
+And so that's how he saved me.
+
+And Enzyme, yeah, I worked with William Moses, and he held my hand
+
+5:23:30
+
+but still my experience is, Enzyme is fragile as...yeah... when it falls apart,
+it's not like Zygote... when Zygote gives diagnostics, it gives diagnostics...
+when Enzyme falls apart, your process just dies, because it usually means
+that LLVM code is incorrect. And it's like, you never know [what's going on],
+it's ... I don't know, if like... if one can work really close with people
+like William then Enzyme might be great... 
+
+5:24:00
+
+but you need to really... because yeah... 
+you then generalize, do slightly different [thing],
+and something works, and now you do something else, 
+and it now breaks... so, it's...
+
+Enzyme is [a] great thing, it's a great product.
+
+But here, you are using non-standard pattern[s],
+and they are not tested well.
+
+Session chair: Awesome. Thank you. Well, if we don't have any more
+questions, then let's thank our presenter another time, and... yeah...
+
+Presenter: Thanks!
+
+5:24:30
+
+END OF TRANSCRIPT (26 minutes)
