@@ -19,3 +19,5 @@
   * September 2022: I open source the May-August work: https://github.com/anhinga/julia-flux-drafts/tree/main/arxiv-1606-09470-section3/May-August-2022
   
   * July 2023: Double-checking that things work in Julia 1.9.2: https://github.com/anhinga/2023-julia-drafts/tree/main/reproduce-in-Julia-1.9.2/DMM-lite
+
+  * October 2024: Double-checked that the Julia 1.9.2 test above also succeeds with Julia 1.10.5 and Julia 1.11.0 (Zygote 0.6.71, the latest version)
