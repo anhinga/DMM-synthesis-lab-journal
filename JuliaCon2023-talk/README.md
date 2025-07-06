@@ -19,4 +19,6 @@ remarkably good.
 
 The video recording is currently at https://www.youtube.com/watch?v=FIeO1yenQ6Y starting at 4 hours 58 minutes
 
+  * https://www.youtube.com/watch?v=FIeO1yenQ6Y&t=17886s (starting at 4:58:06)
+
 [annotated-transcript.txt](annotated-transcript.txt) - annotated transcript (26 minutes)
