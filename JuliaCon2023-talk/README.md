@@ -21,4 +21,6 @@ The video recording is currently at https://www.youtube.com/watch?v=FIeO1yenQ6Y 
 
   * https://www.youtube.com/watch?v=FIeO1yenQ6Y&t=17886s (starting at 4:58:06)
 
+  * There is a stand-alone video recording the same talk: https://www.youtube.com/watch?v=TybDJZ4GO5g
+
 [annotated-transcript.txt](annotated-transcript.txt) - annotated transcript (26 minutes)
